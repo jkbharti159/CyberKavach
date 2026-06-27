@@ -2,7 +2,6 @@ import express from "express";
 import path from "path";
 import crypto from "crypto";
 import dotenv from "dotenv";
-import fs from "fs";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI, Type } from "@google/genai";
 import {
@@ -19,7 +18,7 @@ import {
 dotenv.config();
 
 const app = express();
-const PORT = parseInt(process.env.PORT || "3000", 10);
+const PORT = 3000;
 
 // Permissive CORS middleware for cross-origin or sandboxed iframe environments
 app.use((req, res, next) => {
@@ -1058,22 +1057,18 @@ app.get("/api/models/diagnostics/:modelName", (req, res) => {
 
 // Serve frontend assets
 async function startServer() {
-  const distPath = path.join(process.cwd(), "dist");
-  const hasDist = fs.existsSync(distPath);
-
-  if (process.env.NODE_ENV === "production" || hasDist) {
-    console.log(`[CyberKavach Backend] Production mode active or dist/ found. Serving static assets from: ${distPath}`);
-    app.use(express.static(distPath));
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
-    });
-  } else {
-    console.log("[CyberKavach Backend] Dev mode active and dist/ missing. Starting Vite Dev Server Middleware...");
+  if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
     });
     app.use(vite.middlewares);
+  } else {
+    const distPath = path.join(process.cwd(), "dist");
+    app.use(express.static(distPath));
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(distPath, "index.html"));
+    });
   }
 
   app.listen(PORT, "0.0.0.0", () => {
