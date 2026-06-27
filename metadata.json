@@ -1,0 +1,6 @@
+{
+  "name": "CyberKavach",
+  "description": "Enterprise-grade AI-powered malicious URL analysis, phishing detection, and explainable threat intelligence platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
