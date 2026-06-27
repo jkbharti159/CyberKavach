@@ -4,21 +4,22 @@ import { getFirestore } from "firebase/firestore";
 
 const metaEnv = (import.meta as any).env || {};
 
-const firebaseConfig = {
-  apiKey: metaEnv.VITE_FIREBASE_API_KEY,
-  authDomain: metaEnv.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: metaEnv.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: metaEnv.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: metaEnv.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: metaEnv.VITE_FIREBASE_APP_ID,
-};
-
 // Check if all essential keys exist
 const hasFirebaseConfig = !!(
-  firebaseConfig.apiKey &&
-  firebaseConfig.projectId &&
-  firebaseConfig.authDomain
+  metaEnv.VITE_FIREBASE_API_KEY &&
+  metaEnv.VITE_FIREBASE_PROJECT_ID &&
+  metaEnv.VITE_FIREBASE_AUTH_DOMAIN
 );
+
+// Fallback dummy values to prevent Firebase SDK from crashing at startup when env variables are not set on hosting platforms like Render
+const firebaseConfig = {
+  apiKey: metaEnv.VITE_FIREBASE_API_KEY || "dummy-api-key-placeholder-to-prevent-crash",
+  authDomain: metaEnv.VITE_FIREBASE_AUTH_DOMAIN || "dummy-project.firebaseapp.com",
+  projectId: metaEnv.VITE_FIREBASE_PROJECT_ID || "dummy-project",
+  storageBucket: metaEnv.VITE_FIREBASE_STORAGE_BUCKET || "dummy-project.appspot.com",
+  messagingSenderId: metaEnv.VITE_FIREBASE_MESSAGING_SENDER_ID || "123456789",
+  appId: metaEnv.VITE_FIREBASE_APP_ID || "1:123456789:web:abcdef123456",
+};
 
 if (!hasFirebaseConfig) {
   console.warn(

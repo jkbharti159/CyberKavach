@@ -18,7 +18,7 @@ import {
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = parseInt(process.env.PORT || "3000", 10);
 
 // Permissive CORS middleware for cross-origin or sandboxed iframe environments
 app.use((req, res, next) => {
