@@ -19,7 +19,7 @@ import {
   UserSession, DashboardStats, UrlAnalysisResult, UserRole,
   LearningProgress, FootprintScanResult, DeepfakeScanResult, DataLeakResult, NotificationItem
 } from "./types";
-import { Activity, ShieldAlert, Cpu, Menu, ChevronDown, LayoutDashboard, SearchCode, Database, MessageSquare, Globe, Award, Server, Settings, User } from "lucide-react";
+import { Activity, ShieldAlert, Cpu, Menu, ChevronDown, LayoutDashboard, SearchCode, Database, MessageSquare, Globe, Award, Server, Settings, User, Linkedin } from "lucide-react";
 
 const safeStorage = {
   getItem(key: string): string | null {
@@ -505,6 +505,40 @@ export default function App() {
               <Cpu className="w-3.5 h-3.5 text-cyan-400" />
               <span className="text-[10px] uppercase font-bold">Accuracy:</span>
               <span className="text-[10px] text-cyan-400 font-bold">99.98%</span>
+            </div>
+
+            {/* Developer Section (GitHub Profile Picture, Portfolio, LinkedIn) */}
+            <div className="flex items-center gap-3 border-l border-slate-800 pl-4 sm:pl-6 h-8">
+              <div className="w-7 h-7 rounded-full border border-cyan-500/30 p-0.5 overflow-hidden shadow-[0_0_10px_rgba(6,182,212,0.15)] flex-shrink-0">
+                <img 
+                  src="https://github.com/jkbharti159.png" 
+                  alt="Developer Profile" 
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full rounded-full object-cover"
+                />
+              </div>
+
+              <a 
+                href="https://portfolio-w61x.onrender.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-[10px] uppercase font-bold text-slate-400 hover:text-cyan-400 transition-colors"
+                title="Developer Portfolio"
+              >
+                <Globe className="w-3.5 h-3.5 text-cyan-400" />
+                <span className="hidden md:inline">Portfolio</span>
+              </a>
+              
+              <a 
+                href="https://www.linkedin.com/in/jkbharti159/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-[10px] uppercase font-bold text-slate-400 hover:text-cyan-400 transition-colors"
+                title="LinkedIn Profile"
+              >
+                <Linkedin className="w-3.5 h-3.5 text-cyan-400" />
+                <span className="hidden md:inline">LinkedIn</span>
+              </a>
             </div>
           </div>
         </header>

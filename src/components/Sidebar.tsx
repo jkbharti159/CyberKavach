@@ -66,7 +66,7 @@ export default function Sidebar({
       {/* Mobile Sidebar backdrop overlay */}
       {mobileOpen && (
         <div 
-          className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-40 lg:hidden cursor-pointer"
+          className="fixed inset-0 bg-slate-950/20 z-40 lg:hidden cursor-pointer"
           onClick={onMobileClose}
         />
       )}
